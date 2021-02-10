@@ -12,7 +12,7 @@ namespace SlothEnterprise.ProductApplication.Tests
     {
         private readonly IProductApplicationService _sut;
         private readonly Mock<IConfidentialInvoiceService> _confidentialInvoiceServiceMock = new Mock<IConfidentialInvoiceService>();
-        private readonly ISellerApplication _sellerApplication;
+        private readonly SellerApplication _sellerApplication;
         private readonly Mock<IApplicationResult> _result = new Mock<IApplicationResult>();
 
         public ProductApplicationTests()
@@ -21,11 +21,13 @@ namespace SlothEnterprise.ProductApplication.Tests
             _result.SetupProperty(p => p.Success, true);
             var productApplicationService = new Mock<IProductApplicationService>();
             _sut = productApplicationService.Object;
-            productApplicationService.Setup(m => m.SubmitApplicationFor(It.IsAny<ISellerApplication>())).Returns(1);
-            var sellerApplicationMock = new Mock<ISellerApplication>();
-            sellerApplicationMock.SetupProperty(p => p.Product, new ConfidentialInvoiceDiscount());
-            sellerApplicationMock.SetupProperty(p => p.CompanyData, new SellerCompanyData());
-            _sellerApplication = sellerApplicationMock.Object;
+            productApplicationService.Setup(m => m.SubmitApplicationFor(It.IsAny<SellerApplication>())).Returns(1);
+
+            _sellerApplication = new SellerApplication
+            {
+                CompanyData = new SellerCompanyData(),
+                Product = new ConfidentialInvoiceDiscount()
+            };
         }
 
         [Fact]
