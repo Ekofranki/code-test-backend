@@ -4,6 +4,6 @@ namespace SlothEnterprise.ProductApplication
 {
     public interface IProductApplicationService
     {
-        int SubmitApplicationFor(ISellerApplication application);
+        int SubmitApplicationFor(SellerApplication application);
     }
 }

@@ -12,19 +12,21 @@ namespace SlothEnterprise.ProductApplication
         private readonly IConfidentialInvoiceService _confidentialInvoiceWebService;
         private readonly IBusinessLoansService _businessLoansService;
 
-        public ProductApplicationService(ISelectInvoiceService selectInvoiceService, IConfidentialInvoiceService confidentialInvoiceWebService, IBusinessLoansService businessLoansService)
+        public ProductApplicationService(ISelectInvoiceService selectInvoiceService,
+            IConfidentialInvoiceService confidentialInvoiceWebService,
+            IBusinessLoansService businessLoansService)
         {
             _selectInvoiceService = selectInvoiceService;
             _confidentialInvoiceWebService = confidentialInvoiceWebService;
             _businessLoansService = businessLoansService;
         }
 
-        public int SubmitApplicationFor(ISellerApplication application)
+        public int SubmitApplicationFor(SellerApplication application)
         {
-
             if (application.Product is SelectiveInvoiceDiscount sid)
             {
-                return _selectInvoiceService.SubmitApplicationFor(application.CompanyData.Number.ToString(), sid.InvoiceAmount, sid.AdvancePercentage);
+                return _selectInvoiceService.SubmitApplicationFor(application.CompanyData.Number.ToString(),
+                    sid.InvoiceAmount, sid.AdvancePercentage);
             }
 
             if (application.Product is ConfidentialInvoiceDiscount cid)
