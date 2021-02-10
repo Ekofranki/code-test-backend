@@ -5,6 +5,6 @@ namespace SlothEnterprise.ProductApplication.Applications
     public class SellerApplication
     {
         public IProduct Product { get; set; }
-        public ISellerCompanyData CompanyData { get; set; }
+        public SellerCompanyData CompanyData { get; set; }
     }
 }
