@@ -3,9 +3,9 @@ using SlothEnterprise.ProductApplication.Products;
 
 namespace SlothEnterprise.ProductApplication.Submitters
 {
-    public interface IApplicationSubmitter<in TProduct>
-        where TProduct : IProduct
+    public interface IApplicationSubmitter
     {
-        int Submit(SellerApplication application, TProduct product);
+        bool CanSubmit(IProduct product);
+        int Submit(SellerApplication application);
     }
 }
