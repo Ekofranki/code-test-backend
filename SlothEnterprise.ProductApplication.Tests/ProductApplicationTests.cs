@@ -11,7 +11,10 @@ namespace SlothEnterprise.ProductApplication.Tests
     public class ProductApplicationTests
     {
         private readonly IProductApplicationService _sut;
-        private readonly Mock<IConfidentialInvoiceService> _confidentialInvoiceServiceMock = new Mock<IConfidentialInvoiceService>();
+
+        private readonly Mock<IConfidentialInvoiceService> _confidentialInvoiceServiceMock =
+            new Mock<IConfidentialInvoiceService>();
+
         private readonly SellerApplication _sellerApplication;
         private readonly Mock<IApplicationResult> _result = new Mock<IApplicationResult>();
 
@@ -33,8 +36,13 @@ namespace SlothEnterprise.ProductApplication.Tests
         [Fact]
         public void ProductApplicationService_SubmitApplicationFor_WhenCalledWithSelectiveInvoiceDiscount_ShouldReturnOne()
         {
-            _confidentialInvoiceServiceMock.Setup(m => m.SubmitApplicationFor(It.IsAny<CompanyDataRequest>(), It.IsAny<decimal>(), It.IsAny<decimal>(), It.IsAny<decimal>())).Returns(_result.Object);
+            _confidentialInvoiceServiceMock
+                .Setup(m => m.SubmitApplicationFor(It.IsAny<CompanyDataRequest>(),
+                    It.IsAny<decimal>(), It.IsAny<decimal>(), It.IsAny<decimal>()))
+                .Returns(_result.Object);
+
             var result = _sut.SubmitApplicationFor(_sellerApplication);
+
             result.Should().Be(1);
         }
     }
